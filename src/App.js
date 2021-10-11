@@ -13,33 +13,32 @@ class App extends React.Component {
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-    name: "",
-    number: "",
-    contact: null,
+
+    // contact: null,
     filter: "",
   };
 
-  resetForm = () => {
-    this.setState({ name: " ", number: " " });
-  };
+
   handleSubmit = (e) => {
-    e.preventDefault();
     const obj = {
       id: uuidv4(),
-      name: this.state.name,
-      number: this.state.number,
+      name: e.name,
+      number: e.number,
     };
-    this.setState({ contact: obj });
-    this.setState((prevState) => {
-      return { contacts: [...prevState.contacts, obj] };
-    });
-    this.resetForm();
+    const knownContact = this.state.contacts.find(contact => { return contact.name === obj.name })
+
+    if (knownContact) { return alert('already exist') }
+    else {
+      this.setState({ contact: obj });
+      this.setState((prevState) => {
+
+        return { contacts: [...prevState.contacts, obj] };
+      });
+
+    }
+
   };
-  handleChange = (e) => {
-    this.setState(() => ({
-      [e.target.name]: e.target.value,
-    }));
-  };
+
   handleBtn = (e) => {
     this.setState((prevState) => ({
       contacts: prevState.contacts.filter(
@@ -54,8 +53,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { name, number, filter } = this.state;
-
+    const { filter } = this.state;
     const loweredFilter = this.state.filter.toLowerCase();
     const filteredContacts = this.state.contacts.filter((contact) =>
       contact.name.toLowerCase().includes(loweredFilter)
@@ -63,11 +61,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm
-          name={name}
-          number={number}
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
+        <ContactForm handleSubmit={this.handleSubmit}
+
         ></ContactForm>
         <Filter data={filter} handler={this.filterChange}></Filter>
         <h2>Contacts</h2>

@@ -1,15 +1,37 @@
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function ContactForm({
-  name,
-  number,
-  handleSubmit,
-  handleChange,
-}) {
-  const nameId = uuidv4();
-  const numberId = uuidv4();
-  return (
-    <form onSubmit={handleSubmit}>
+
+class ContactForm extends React.Component {
+
+  state = {
+    name: "",
+    number: "",
+    contact: null,
+
+  }
+  resetForm = () => {
+    return this.setState({ name: "", number: "" });
+  };
+
+  handleChange = (e) => {
+    this.setState(() => ({
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  submit = e => {
+    e.preventDefault();
+    const { props, state } = this;
+    console.log(props);
+    props.handleSubmit(state);
+    this.resetForm();
+  };
+
+  render() {
+    const nameId = uuidv4();
+    const numberId = uuidv4();
+    return (<form className="form" onSubmit={this.submit}>
       <label htmlFor={nameId}>
         Name
         <input
@@ -18,9 +40,9 @@ export default function ContactForm({
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
-          value={name}
+          value={this.state.name}
           id={nameId}
-          onChange={handleChange}
+          onChange={this.handleChange}
         ></input>
       </label>
       <label htmlFor={numberId}>
@@ -31,12 +53,15 @@ export default function ContactForm({
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={number}
+          value={this.state.number}
           id={numberId}
-          onChange={handleChange}
+          onChange={this.handleChange}
         ></input>
       </label>
-      <button type="submit">Add contact</button>
+      <button className="addBtn" type="submit">Add contact</button>
     </form>
-  );
+    )
+  }
 }
+
+export default ContactForm
