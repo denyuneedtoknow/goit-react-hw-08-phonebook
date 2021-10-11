@@ -1,0 +1,10 @@
+.label {
+  display: flex;
+  width: 600px;
+}
+.inputTitle {
+  color: blue;
+}
+.input {
+  margin-left: 15px;
+}

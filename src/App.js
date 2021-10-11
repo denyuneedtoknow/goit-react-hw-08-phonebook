@@ -27,7 +27,7 @@ class App extends React.Component {
     };
     const knownContact = this.state.contacts.find(contact => { return contact.name === obj.name })
 
-    if (knownContact) { return alert('already exist') }
+    if (knownContact) { return alert(`Sorry, contact ${obj.name} already existing`) }
     else {
       this.setState({ contact: obj });
       this.setState((prevState) => {
@@ -59,7 +59,7 @@ class App extends React.Component {
       contact.name.toLowerCase().includes(loweredFilter)
     );
     return (
-      <div>
+      <div className="App">
         <h1>Phonebook</h1>
         <ContactForm handleSubmit={this.handleSubmit}
 

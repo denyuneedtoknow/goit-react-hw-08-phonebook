@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import s from "./ContactForm.module.css"
 
 
 class ContactForm extends React.Component {
@@ -31,10 +32,10 @@ class ContactForm extends React.Component {
   render() {
     const nameId = uuidv4();
     const numberId = uuidv4();
-    return (<form className="form" onSubmit={this.submit}>
-      <label htmlFor={nameId}>
-        Name
-        <input
+    return (<form className={s.form} onSubmit={this.submit}>
+      <label className={s.label} htmlFor={nameId}>
+        <p className={s.inputTitle}>Name</p>
+        <input className={s.input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -45,9 +46,9 @@ class ContactForm extends React.Component {
           onChange={this.handleChange}
         ></input>
       </label>
-      <label htmlFor={numberId}>
-        Phone
-        <input
+      <label className={s.label} htmlFor={numberId}>
+        <p className={s.inputTitle}>Phone</p>
+        <input className={s.input}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -58,7 +59,7 @@ class ContactForm extends React.Component {
           onChange={this.handleChange}
         ></input>
       </label>
-      <button className="addBtn" type="submit">Add contact</button>
+      <button className={s.addBtn} type="submit">Add contact</button>
     </form>
     )
   }
