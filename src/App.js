@@ -18,25 +18,24 @@ class App extends React.Component {
     filter: "",
   };
 
-
   handleSubmit = (e) => {
     const obj = {
       id: uuidv4(),
       name: e.name,
       number: e.number,
     };
-    const knownContact = this.state.contacts.find(contact => { return contact.name === obj.name })
+    const knownContact = this.state.contacts.find((contact) => {
+      return contact.name === obj.name;
+    });
 
-    if (knownContact) { return alert(`Sorry, contact ${obj.name} already existing`) }
-    else {
+    if (knownContact) {
+      return alert(`Sorry, contact ${obj.name} already existing`);
+    } else {
       this.setState({ contact: obj });
       this.setState((prevState) => {
-
         return { contacts: [...prevState.contacts, obj] };
       });
-
     }
-
   };
 
   handleBtn = (e) => {
@@ -51,6 +50,20 @@ class App extends React.Component {
       filter: e.target.value,
     }));
   };
+  componentDidMount() {
+    const contacts = localStorage.getItem("contacts");
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
 
   render() {
     const { filter } = this.state;
@@ -61,9 +74,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Phonebook</h1>
-        <ContactForm handleSubmit={this.handleSubmit}
-
-        ></ContactForm>
+        <ContactForm handleSubmit={this.handleSubmit}></ContactForm>
         <Filter data={filter} handler={this.filterChange}></Filter>
         <h2>Contacts</h2>
         <ContactList
