@@ -24,7 +24,8 @@ export default function ContactForm() {
         console.dir(e.target);
         // setName(e.target.value)
     };
-
+    useEffect(() => { window.localStorage.setItem('name', JSON.stringify(name)) }, [name])
+    useEffect(() => { window.localStorage.setItem('number', JSON.stringify(number)) }, [number])
     const submit = e => {
         e.preventDefault();
         // const { props, state } = this;
