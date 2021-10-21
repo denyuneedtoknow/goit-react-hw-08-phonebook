@@ -24,6 +24,7 @@ class App extends React.Component {
       name: e.name,
       number: e.number,
     };
+
     const knownContact = this.state.contacts.find((contact) => {
       return contact.name === obj.name;
     });
