@@ -18,26 +18,26 @@ class App extends React.Component {
     filter: "",
   };
 
-  handleSubmit = (e) => {
-    const obj = {
-      id: uuidv4(),
-      name: e.name,
-      number: e.number,
-    };
+  // handleSubmit = (e) => {
+  //   const obj = {
+  //     id: uuidv4(),
+  //     name: e.name,
+  //     number: e.number,
+  //   };
 
-    const knownContact = this.state.contacts.find((contact) => {
-      return contact.name === obj.name;
-    });
+  //   const knownContact = this.state.contacts.find((contact) => {
+  //     return contact.name === obj.name;
+  //   });
 
-    if (knownContact) {
-      return alert(`Sorry, contact ${obj.name} already existing`);
-    } else {
-      this.setState({ contact: obj });
-      this.setState((prevState) => {
-        return { contacts: [...prevState.contacts, obj] };
-      });
-    }
-  };
+  //   if (knownContact) {
+  //     return alert(`Sorry, contact ${obj.name} already existing`);
+  //   } else {
+  //     this.setState({ contact: obj });
+  //     this.setState((prevState) => {
+  //       return { contacts: [...prevState.contacts, obj] };
+  //     });
+  //   }
+  // };
 
   handleBtn = (e) => {
     this.setState((prevState) => ({
@@ -75,7 +75,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Phonebook</h1>
-        <ContactForm handleSubmit={this.handleSubmit}></ContactForm>
+        <ContactForm ></ContactForm>
         <Filter data={filter} handler={this.filterChange}></Filter>
         <h2>Contacts</h2>
         <ContactList

@@ -8,11 +8,9 @@ import s from "./ContactForm.module.css"
 export default function ContactForm() {
     const [name, setName] = useState(() => { return JSON.parse(window.localStorage.getItem('name')) ?? ''; });
     const [number, setNumber] = useState(() => { return JSON.parse(window.localStorage.getItem('number')) ?? ''; });
-
+    const [contact, setContact] = useState(null)
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-
         switch (name) {
             case 'name': setName(value);
                 break;
@@ -21,22 +19,26 @@ export default function ContactForm() {
                 break;
             default: return
         }
-        console.dir(e.target);
-        // setName(e.target.value)
+
+    }
+    const onSubmitHandler = (e) => {
+
+        setContact({ name, number })
     };
-    useEffect(() => { window.localStorage.setItem('name', JSON.stringify(name)) }, [name])
-    useEffect(() => { window.localStorage.setItem('number', JSON.stringify(number)) }, [number])
+
+
+
     const submit = e => {
         e.preventDefault();
-        // const { props, state } = this;
-        // console.log(props);
-        // props.handleSubmit(state);
-        // this.resetForm();
     };
+
+    useEffect(() => { window.localStorage.setItem('name', JSON.stringify(name)) }, [name])
+    useEffect(() => { window.localStorage.setItem('number', JSON.stringify(number)) }, [number])
 
 
     const nameId = uuidv4();
     const numberId = uuidv4();
+    ;
     return (<form className={s.form} onSubmit={submit}>
         <label className={s.label} htmlFor={nameId}>
             <p className={s.inputTitle}>Name</p>
@@ -64,7 +66,7 @@ export default function ContactForm() {
                 onChange={handleChange}
             ></input>
         </label>
-        <button className={s.addBtn} type="submit">Add contact</button>
+        <button className={s.addBtn} onSubmit={onSubmitHandler} type="submit">Add contact</button>
     </form>
     )
 
