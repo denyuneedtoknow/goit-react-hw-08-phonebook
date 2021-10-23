@@ -75,7 +75,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Phonebook</h1>
-        <ContactForm ></ContactForm>
+        <ContactForm contacts={this.state.contacts}></ContactForm>
         <Filter data={filter} handler={this.filterChange}></Filter>
         <h2>Contacts</h2>
         <ContactList
