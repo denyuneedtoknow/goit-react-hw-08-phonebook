@@ -5,17 +5,18 @@ import s from "./ContactForm.module.css"
 
 
 
-export default function ContactForm(contacts) {
-    const [name, setName] = useState(() => { return JSON.parse(window.localStorage.getItem('name')) ?? ''; });
-    const [number, setNumber] = useState(() => { return JSON.parse(window.localStorage.getItem('number')) ?? ''; });
-    const [contact, setContact] = useState(null)
-    const [updContacts, setUpdContacts] = useState(contacts)
+export default function ContactForm({ contacts, onSubmit }) {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [contact, setContact] = useState('')
+    // const [updContacts, setUpdContacts] = useState(contacts)
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         switch (name) {
             case 'name': setName(value);
                 break;
-
             case 'number': setNumber(value);
                 break;
             default: return
@@ -23,29 +24,28 @@ export default function ContactForm(contacts) {
 
     }
 
+
     const resetForm = () => {
         setName('')
         setNumber('')
     };
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        setContact({ name, number, id: uuidv4() })
-        resetForm()
-        setUpdContacts([...contacts.contacts])
-        return updContacts
-    };
+    // const onSubmitHandler = (e) => {
+    //     e.preventDefault();
+    //     setContact({ id: uuidv4(), name, number, })
+    //     setUpdContacts([...contacts.contacts, contact])
+    //     return updContacts
+    // };
 
-    console.dir(updContacts);
 
     const submit = e => {
         e.preventDefault();
+        setContact({ id: uuidv4(), name, number, })
+        onSubmit({ name, number })
+        resetForm()
     };
 
-    useEffect(() => { window.localStorage.setItem('name', JSON.stringify(name)) }, [name])
-    useEffect(() => { window.localStorage.setItem('number', JSON.stringify(number)) }, [number])
 
-    console.log(updContacts);
     const nameId = uuidv4();
     const numberId = uuidv4();
     ;
@@ -76,7 +76,7 @@ export default function ContactForm(contacts) {
                 onChange={handleChange}
             ></input>
         </label>
-        <button className={s.addBtn} onClick={onSubmitHandler} type="submit">Add contact</button>
+        <button className={s.addBtn} type="submit">Add contact</button>
     </form>
     )
 
