@@ -30,12 +30,6 @@ export default function ContactForm({ contacts, onSubmit }) {
         setNumber('')
     };
 
-    // const onSubmitHandler = (e) => {
-    //     e.preventDefault();
-    //     setContact({ id: uuidv4(), name, number, })
-    //     setUpdContacts([...contacts.contacts, contact])
-    //     return updContacts
-    // };
 
 
     const submit = e => {
