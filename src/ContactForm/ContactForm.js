@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, } from "react";
+import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css"
 
 
 
 
-export default function ContactForm({ contacts, onSubmit }) {
+function ContactForm({ contacts, onSubmit }) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [contact, setContact] = useState('')
@@ -43,6 +44,7 @@ export default function ContactForm({ contacts, onSubmit }) {
     const nameId = uuidv4();
     const numberId = uuidv4();
     ;
+
     return (<form className={s.form} onSubmit={submit}>
         <label className={s.label} htmlFor={nameId}>
             <p className={s.inputTitle}>Name</p>
@@ -75,3 +77,12 @@ export default function ContactForm({ contacts, onSubmit }) {
     )
 
 }
+
+const mapStateToProps = (state) => {
+    // console.log(state.contacts);
+    return { contacts: state.contacts }
+}
+
+const mapDispatchToProps = () => { }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm)

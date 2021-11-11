@@ -33,19 +33,19 @@ function App() {
     function handleSubmit({ name, number }) {
         const obj = { id: uuidv4(), name, number }
 
-        console.log(obj);
+        // console.log(obj);
         const knownContact = contacts.find(contact => { return contact.name === obj.name })
         if (knownContact) { return alert(`Sorry, contact ${obj.name} already existing`) }
         else {
             setContacts([...contacts, obj])
 
         }
-        console.log(contacts);
+        // console.log(contacts);
     }
 
     const filterChange = (e) => {
         setFilter(e.target.value)
-        console.log(filter);
+        // console.log(filter);
     };
 
     const loweredFilter = filter.toLowerCase();
@@ -55,7 +55,7 @@ function App() {
 
 
     const handleBtn = (e) => {
-        console.log(e.target.id);
+        // console.log(e.target.id);
         setContacts(contacts.filter(
             (contact) => contact.id !== e.target.id
         ))
