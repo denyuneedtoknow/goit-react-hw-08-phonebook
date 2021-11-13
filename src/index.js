@@ -15,6 +15,3 @@ ReactDOM.render(
   document.getElementById("root")
 );
 // console.log(store);
-store.dispatch(addContact(5));
-store.dispatch(addContact(8));
-store.dispatch(deleteContact(7));

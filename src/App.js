@@ -4,85 +4,102 @@ import "./App.css";
 import ContactList from "./ContactList/ContactList";
 import Filter from "./Filter/Filter";
 import ContactForm from "./ContactForm/ContactForm";
+import { connect } from "react-redux";
+import * as actions from "./redux/Contacts/actions";
 
-class App extends React.Component {
-  state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
-
-    // contact: null,
-    filter: "",
-  };
-
-  handleSubmit = (e) => {
+function App({ filter, contacts, consolingUp, consolingDown }) {
+  const handleSubmit = (e) => {
     const obj = {
       id: uuidv4(),
       name: e.name,
       number: e.number,
     };
-    const knownContact = this.state.contacts.find((contact) => {
+    const knownContact = contacts.find((contact) => {
       return contact.name === obj.name;
     });
-
-    if (knownContact) {
-      return alert(`Sorry, contact ${obj.name} already existing`);
-    } else {
-      this.setState({ contact: obj });
-      this.setState((prevState) => {
-        return { contacts: [...prevState.contacts, obj] };
-      });
-    }
   };
 
-  handleBtn = (e) => {
+  //     if (knownContact) {
+  //       return alert(`Sorry, contact ${obj.name} already existing`);
+  //     } else {
+  //       this.setState({ contact: obj });
+  //       this.setState((prevState) => {
+  //         return { contacts: [...prevState.contacts, obj] };
+  //       });
+  //     }
+  //   };
+
+  const handleBtn = (e) => {
     this.setState((prevState) => ({
       contacts: prevState.contacts.filter(
         (contact) => contact.id !== e.target.id
       ),
     }));
   };
-  filterChange = (e) => {
+  const filterChange = (e) => {
     this.setState(() => ({
       filter: e.target.value,
     }));
   };
-  componentDidMount() {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
 
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
-    }
-  }
+  // componentDidMount() {
+  //   const contacts = localStorage.getItem("contacts");
+  //   const parsedContacts = JSON.parse(contacts);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
-    }
-  }
+  //   if (parsedContacts) {
+  //     this.setState({ contacts: parsedContacts });
+  //   }
+  // }
 
-  render() {
-    const { filter } = this.state;
-    const loweredFilter = this.state.filter.toLowerCase();
-    const filteredContacts = this.state.contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(loweredFilter)
-    );
-    return (
-      <div className="App">
-        <h1>Phonebook</h1>
-        <ContactForm handleSubmit={this.handleSubmit}></ContactForm>
-        <Filter data={filter} handler={this.filterChange}></Filter>
-        <h2>Contacts</h2>
-        <ContactList
-          contacts={filteredContacts}
-          handleBtn={this.handleBtn}
-        ></ContactList>
-      </div>
-    );
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.contacts !== prevState.contacts) {
+  //     localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+  //   }
+  // }
+  const onClickBtnUp = () => {
+    console.log("click");
+    consolingUp();
+  };
+  const onClickBtnDown = () => {
+    console.log("click");
+    consolingDown();
+  };
+  //   render() {
+  // const { filter } = this.state;
+  const loweredFilter = filter.toLowerCase();
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(loweredFilter)
+  );
+  return (
+    <div className="App">
+      <h1>Phonebook</h1>
+      <ContactForm handleSubmit={handleSubmit}></ContactForm>
+      <Filter data={filter} handler={filterChange}></Filter>
+      <h2>Contacts</h2>
+      <ContactList
+        contacts={filteredContacts}
+        handleBtn={handleBtn}
+      ></ContactList>
+      <button onClick={onClickBtnUp} type="button">
+        Up
+      </button>
+      <button onClick={onClickBtnDown} type="button">
+        Down
+      </button>
+    </div>
+  );
 }
-export default App;
+// }
+
+const mapStateToProps = (state) => ({
+  filter: state.filter,
+  contacts: state.contacts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addContact: () => dispatch(actions.addContact()),
+  deleteContact: () => dispatch(actions.deleteContact()),
+  consolingUp: () => dispatch(actions.consolingUp(5)),
+  consolingDown: () => dispatch(actions.consolingDown(5)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
