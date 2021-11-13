@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import { addContact, deleteContact } from "./redux/Contacts/actions";
 import App from "./App";
 
 ReactDOM.render(
@@ -13,3 +14,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+// console.log(store);
+store.dispatch(addContact(5));
+store.dispatch(addContact(8));
+store.dispatch(deleteContact(7));

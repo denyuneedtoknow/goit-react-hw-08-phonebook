@@ -1,8 +1,8 @@
-export const addContact = {
-    type: "contacts/add",
-    payload: {}
-}
-export const deleteContact = {
-    type: "contacts/delete",
-    payload: {}
-}
+export const addContact = (value) => ({
+  type: "contacts/add",
+  payload: { text: value },
+});
+export const deleteContact = (value) => ({
+  type: "contacts/delete",
+  payload: { text: value },
+});
