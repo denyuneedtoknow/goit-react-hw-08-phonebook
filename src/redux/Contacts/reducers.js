@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { addContact, deleteContact } from "./actions";
 import { store } from "../store";
+import { handleChange } from "../Input/input-reducers";
 
 const initState = {
   localstateContacts: JSON.parse(localStorage.getItem("contacts")),
@@ -24,11 +25,6 @@ const newContact = (state = initState.newContact, action) => {
   return state;
 };
 
-// const handleChange = (state = initState.newContact) => {
-//   console.log({ [state.name]: state.value });
-//   return { [e.target.name]: e.target.value };
-// };
-
 const consoling = (state = 0, action) => {
   switch (action.type) {
     case "contacts/consolingUp":
@@ -49,5 +45,5 @@ export const contactReducer = combineReducers({
   filter: contactFilter,
   consoling: consoling,
   newContact: newContact,
-  //   handleChange: handleChange,
+  handleChange: handleChange,
 });

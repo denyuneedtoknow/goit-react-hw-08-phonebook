@@ -15,7 +15,7 @@ export const consolingDown = (value) => ({
   payload: value,
 });
 
-export const handleChange = (e) => ({
-  type: "contacts/inputChange",
-  payload: e,
-});
+// export const handleChange = (e) => ({
+//   type: "contacts/inputChange",
+//   payload: e,
+// });
