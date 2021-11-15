@@ -1,4 +1,4 @@
-import { useState, } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css";
 import { connect } from "react-redux";
@@ -7,7 +7,6 @@ import * as actions from "../redux/Contacts/actions";
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const [contact, setContact] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +29,6 @@ function ContactForm({ onSubmit }) {
 
   const submit = (e) => {
     e.preventDefault();
-    setContact({ id: uuidv4(), name, number });
     onSubmit({ name, number });
     resetForm();
   };
@@ -76,7 +74,8 @@ function ContactForm({ onSubmit }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: ({ name, number }) => dispatch(actions.addContact({ name, number })),
+  onSubmit: ({ name, number }) =>
+    dispatch(actions.addContact({ name, number })),
   deleteContact: (id) => dispatch(actions.deleteContact(id)),
 });
 export default connect(null, mapDispatchToProps)(ContactForm);
