@@ -2,13 +2,15 @@ import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
 import * as actions from "./actions";
 
-const initState = () => {
-  if (localStorage.getItem("contacts")) {
-    return JSON.parse(localStorage.getItem("contacts"));
-  } else {
-    return [];
-  }
-};
+// const initState = () => {
+//   if (localStorage.getItem("contacts")) {
+//     return JSON.parse(localStorage.getItem("contacts"));
+//   } else {
+//     return [];
+//   }
+// };
+
+const initState = [];
 
 // const contactList = (state = initState(), action) => {
 //   switch (action.type) {
@@ -42,7 +44,7 @@ const initState = () => {
 //   }
 // };
 
-const contactList = createReducer(initState(), {
+const contactList = createReducer(initState, {
   [actions.addContact]: (state, action) => {
     if (
       state.find((contact) => {
@@ -52,10 +54,10 @@ const contactList = createReducer(initState(), {
       alert(`Sorry, contact ${action.payload.name} already existing`);
       return state;
     } else {
-      localStorage.setItem(
-        "contacts",
-        JSON.stringify([...state, action.payload])
-      );
+      // localStorage.setItem(
+      //   "contacts",
+      //   JSON.stringify([...state, action.payload])
+      // );
       return [...state, action.payload];
     }
   },
@@ -63,7 +65,7 @@ const contactList = createReducer(initState(), {
     const newState = state.filter(
       (contact) => contact.id !== action.payload.target.id
     );
-    localStorage.setItem("contacts", JSON.stringify(newState));
+    // localStorage.setItem("contacts", JSON.stringify(newState));
     return newState;
   },
 });
