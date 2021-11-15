@@ -1,49 +1,51 @@
 import { combineReducers } from "redux";
-import { addContact, deleteContact } from "./actions";
-import { store } from "../store";
-import { handleChange } from "../Input/input-reducers";
 
-const initState = {
-  localstateContacts: JSON.parse(localStorage.getItem("contacts")),
-  newContact: { name: "", number: "" },
-};
 
-const contactList = (state = initState.localstateContacts, action) => {
+
+
+const initState = () => {
+  if (localStorage.getItem("contacts")) {
+    return JSON.parse(localStorage.getItem("contacts"))
+  }
+  else { return [] }
+}
+
+const contactList = (state = initState(), action) => {
   switch (action.type) {
     case "contacts/add":
-      return [...state, action.payload];
-    case "contacts/delete":
-      return state.filter((contact) => contact.id !== action.payload.id);
-    default:
-      return state;
-  }
-};
-const contactFilter = (state = "", action) => {
-  return state;
-};
-const newContact = (state = initState.newContact, action) => {
-  return state;
-};
+      console.log(action.payload);
+      const knownContact = state.find((contact) => {
+        return contact.name === action.payload.name;
+      });
+      if (knownContact) {
+        alert(`Sorry, contact ${action.payload.name} already existing`);
+        return state
+      } else {
+        localStorage.setItem("contacts", JSON.stringify([...state, action.payload]))
+        return [...state, action.payload];
 
-const consoling = (state = 0, action) => {
-  switch (action.type) {
-    case "contacts/consolingUp":
-      state = state + action.payload;
-      console.log(state);
-      return state;
-    case "contacts/consolingDown":
-      state = state - action.payload;
-      console.log(state);
-      return state;
+      }
+
+    case "contacts/delete":
+      const newState = state.filter((contact) => contact.id !== action.payload.target.id);
+      localStorage.setItem("contacts", JSON.stringify(newState))
+      return newState;
     default:
       return state;
   }
 };
+const filter = (state = "", action) => {
+  switch (action.type) {
+    case "contacts/filter":
+      return action.payload
+
+    default: return state;
+  };
+}
+
+
 
 export const contactReducer = combineReducers({
   contacts: contactList,
-  filter: contactFilter,
-  consoling: consoling,
-  newContact: newContact,
-  handleChange: handleChange,
+  filter: filter,
 });

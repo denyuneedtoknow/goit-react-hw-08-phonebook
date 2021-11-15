@@ -1,6 +1,9 @@
+import { connect, } from "react-redux";
+import * as actions from "../redux/Contacts/actions";
 import s from "./Filter.module.css";
 
-export default function Filter({ data, handler }) {
+function Filter({ data, handler }) {
+  console.log(data);
   return (
     <label className={s.label}>
       <p className={s.inputTitle}>Find</p>
@@ -14,3 +17,12 @@ export default function Filter({ data, handler }) {
     </label>
   );
 }
+
+const mapStateToProps = (state) => ({
+  data: state.filter,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handler: (e) => dispatch(actions.filter(e.target.value))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

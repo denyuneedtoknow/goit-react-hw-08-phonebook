@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css";
 import { connect } from "react-redux";
@@ -74,14 +74,9 @@ function ContactForm({ onSubmit }) {
     </form>
   );
 }
-// }
-const mapStateToProps = (state) => ({
-  filter: state.filter,
-  contacts: state.contacts,
-});
 
 const mapDispatchToProps = (dispatch) => ({
-  addContact: () => dispatch(actions.addContact()),
-  deleteContact: () => dispatch(actions.deleteContact()),
+  onSubmit: ({ name, number }) => dispatch(actions.addContact({ name, number })),
+  deleteContact: (id) => dispatch(actions.deleteContact(id)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default connect(null, mapDispatchToProps)(ContactForm);

@@ -1,10 +1,13 @@
-export const addContact = (value) => ({
+import { v4 as uuidv4 } from "uuid";
+
+
+export const addContact = ({ name, number }) => ({
   type: "contacts/add",
-  payload: { value },
+  payload: { id: uuidv4(), name, number },
 });
-export const deleteContact = (value) => ({
+export const deleteContact = (contactId) => ({
   type: "contacts/delete",
-  payload: { text: value },
+  payload: contactId,
 });
 export const consolingUp = (value) => ({
   type: "contacts/consolingUp",
@@ -14,8 +17,8 @@ export const consolingDown = (value) => ({
   type: "contacts/consolingDown",
   payload: value,
 });
+export const filter = (value) => ({
+  type: "contacts/filter",
+  payload: value,
+});
 
-// export const handleChange = (e) => ({
-//   type: "contacts/inputChange",
-//   payload: e,
-// });

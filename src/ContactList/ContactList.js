@@ -1,6 +1,9 @@
 import s from "./ContactList.module.css";
+import { connect } from "react-redux";
+import * as actions from "../redux/Contacts/actions";
 
-export default function ContactList({ contacts, handleBtn }) {
+function ContactList({ contacts, deleteContact }) {
+
   return (
     <>
       {contacts.map((contact) => (
@@ -9,7 +12,7 @@ export default function ContactList({ contacts, handleBtn }) {
             {contact.name}
           </p>
           <p className={s.contactNumber}>{contact.number}</p>
-          <button className={s.addBtn} id={contact.id} onClick={handleBtn}>
+          <button className={s.addBtn} id={contact.id} onClick={deleteContact}>
             Delete
           </button>
         </div>
@@ -17,3 +20,22 @@ export default function ContactList({ contacts, handleBtn }) {
     </>
   );
 }
+
+
+
+
+const mapStateToProps = (state) => {
+  const filter = state.filter
+  const loweredFilter = filter.toLowerCase()
+  return {
+    contacts: state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(loweredFilter)),
+  }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addContact: () => dispatch(actions.addContact()),
+  deleteContact: (id) => dispatch(actions.deleteContact(id)),
+
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
