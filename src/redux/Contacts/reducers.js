@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-
-
+import { createReducer } from '@reduxjs/toolkit';
 
 
 const initState = () => {
@@ -9,6 +8,8 @@ const initState = () => {
   }
   else { return [] }
 }
+
+
 
 const contactList = (state = initState(), action) => {
   switch (action.type) {
