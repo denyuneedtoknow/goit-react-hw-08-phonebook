@@ -77,6 +77,6 @@ function ContactForm({ onSubmit }) {
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ name, number }) =>
     dispatch(addContact({ name, number })),
-  deleteContact: (id) => dispatch(deleteContact(id)),
+  deleteContact: (id) => dispatch(actions.deleteContact(id)),
 });
 export default connect(null, mapDispatchToProps)(ContactForm);

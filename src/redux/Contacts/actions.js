@@ -15,6 +15,10 @@ export const deleteContactRequest = createAction("contacts/deleteRequest")
 export const deleteContactSuccess = createAction("contacts/deleteSuccess")
 export const deleteContactFail = createAction("contacts/deleteFail")
 
+export const fetchContactsRequest = createAction("contacts/fetchRequest")
+export const fetchContactsSuccess = createAction("contacts/fetchSuccess")
+export const fetchContactsFail = createAction("contacts/fetchFail")
+
 
 
 

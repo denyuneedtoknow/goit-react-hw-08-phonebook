@@ -7,8 +7,18 @@ export const addContact = ({ id, name, number }) => dispatch => {
     axios.post('/contacts', contact).then(({ data }) => dispatch(actions.addContactSuccess(data))).catch(error => dispatch(actions.addContactFail(error)))
 }
 
-// export default addContact
-export const deleteContact = ({ id }) => dispatch => {
+
+export const deleteContact = (id) => dispatch => {
+    console.log(id);
     dispatch(actions.deleteContactRequest())
-    axios.delete(`/contacts/${id}`).then(() => dispatch(actions.deleteContactSuccess(id))).catch(error => dispatch(actions.deleteContactFail(error)))
+    axios
+        .delete(`/contacts/${id.target.id}`)
+        .then(() => dispatch(actions.deleteContactSuccess(id)))
+        .catch(error => dispatch(actions.deleteContactFail(error)))
+}
+
+
+export const fetchContacts = () => dispatch => {
+    dispatch(actions.fetchContactsRequest())
+    return axios.get('/contacts').then(({ data }) => dispatch(actions.fetchContactsSuccess(data))).catch(error => dispatch(actions.fetchContactsFail(error)))
 }
