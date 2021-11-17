@@ -1,3 +1,4 @@
+
 import contactReducer from "../redux/Contacts/reducers";
 import {
   configureStore,
@@ -24,19 +25,17 @@ const middleware = [
   }),
 ];
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
 
-const persistedReducer = persistReducer(persistConfig, contactReducer);
-// export const store = createStore(contactReducer, composeWithDevTools());
+// const persistedReducer = persistReducer(persistConfig, contactReducer);
 
-const store = configureStore({
-  reducer: persistedReducer,
+export const store = configureStore({
+  reducer: contactReducer,
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });
 
-const persistor = persistStore(store);
-export default { store, persistor };
+// export const persistor = persistStore(store);

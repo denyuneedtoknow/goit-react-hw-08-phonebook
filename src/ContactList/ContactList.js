@@ -1,8 +1,10 @@
 import s from "./ContactList.module.css";
 import { connect } from "react-redux";
 import * as actions from "../redux/Contacts/actions";
+import { addContact } from '../redux/Contacts/operations'
 
 function ContactList({ contacts, deleteContact }) {
+
 
   return (
     <>
@@ -34,7 +36,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addContact: () => dispatch(actions.addContact()),
+  addContact: () => dispatch(addContact()),
   deleteContact: (id) => dispatch(actions.deleteContact(id)),
 
 });

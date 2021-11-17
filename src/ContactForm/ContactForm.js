@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css";
 import { connect } from "react-redux";
 import * as actions from "../redux/Contacts/actions";
+import { addContact, deleteContact } from '../redux/Contacts/operations'
 
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState("");
@@ -75,7 +76,7 @@ function ContactForm({ onSubmit }) {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ name, number }) =>
-    dispatch(actions.addContact({ name, number })),
-  deleteContact: (id) => dispatch(actions.deleteContact(id)),
+    dispatch(addContact({ name, number })),
+  deleteContact: (id) => dispatch(deleteContact(id)),
 });
 export default connect(null, mapDispatchToProps)(ContactForm);
