@@ -3,7 +3,6 @@ import * as actions from "../redux/Contacts/actions";
 import s from "./Filter.module.css";
 
 function Filter({ data, handler }) {
-  console.log(data);
   return (
     <label className={s.label}>
       <p className={s.inputTitle}>Find</p>

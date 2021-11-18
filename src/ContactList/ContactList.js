@@ -1,23 +1,16 @@
 import s from "./ContactList.module.css";
 import { useEffect, } from 'react'
-import { connect, useDispatch } from "react-redux";
+import { connect, } from "react-redux";
 import Loader from "react-loader-spinner";
 import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
 
 
 function ContactList({ contacts, deleteContact, fetchContacts, isLoading }) {
-  // const dispatch = useDispatch()
 
 
   useEffect(() => {
     fetchContacts()
-    // dispatch(fetchContacts())
   }, [fetchContacts]);
-
-
-
-
-
 
   return (
     <>

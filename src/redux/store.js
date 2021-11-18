@@ -2,12 +2,12 @@
 import contactReducer from "../redux/Contacts/reducers";
 import {
   configureStore,
-  combineReducers,
+  // combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
 import {
-  persistStore,
-  persistReducer,
+  // persistStore,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -15,7 +15,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import storage from "redux-persist/lib/storage";
 
 const middleware = [
   ...getDefaultMiddleware({
