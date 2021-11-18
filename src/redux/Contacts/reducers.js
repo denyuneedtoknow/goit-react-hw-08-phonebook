@@ -39,7 +39,7 @@ const filter = createReducer("", {
   [actions.filter]: (_, action) => action.payload,
 });
 
-const loading = createReducer(false, { [addContactSuccess]: () => false, [addContactFail]: () => false, [addContactRequest]: () => true, [deleteContactSuccess]: () => false, [deleteContactFail]: () => false, [deleteContactRequest]: () => true })
+const loading = createReducer(false, { [addContactSuccess]: () => false, [addContactFail]: () => false, [addContactRequest]: () => true, [deleteContactSuccess]: () => false, [deleteContactFail]: () => false, [deleteContactRequest]: () => true, [fetchContactsSuccess]: () => false, [fetchContactsFail]: () => false, [fetchContactsRequest]: () => true, })
 export default combineReducers({
   contacts: contactList,
   filter: filter,
