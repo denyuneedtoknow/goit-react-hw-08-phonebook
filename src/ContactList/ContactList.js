@@ -1,17 +1,18 @@
 import s from "./ContactList.module.css";
 import { useEffect, } from 'react'
 import { connect } from "react-redux";
-
+import Loader from "react-loader-spinner";
 import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
 import { filter } from "../redux/Contacts/actions";
 
-function ContactList({ contacts, deleteContact, fetchContacts }) {
+function ContactList({ contacts, deleteContact, fetchContacts, isLoading }) {
   useEffect(() => {
     fetchContacts()
   }, []);
-
+  console.log(isLoading);
   return (
     <>
+      {isLoading && <Loader type="Bars" color="#00008B" height={120} width={120} />}
       {contacts.map((contact) => (
         <div className={s.contacts} key={contact.id}>
           <p id={contact.id} className={s.contactName}>
@@ -24,6 +25,7 @@ function ContactList({ contacts, deleteContact, fetchContacts }) {
 
         </div>
       ))}
+
     </>
   );
 }
@@ -37,6 +39,7 @@ const normalizedFilter = (filter, contacts) => {
 
 const mapStateToProps = (state) => ({
   contacts: normalizedFilter(state.filter, state.contacts),
+  isLoading: state.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
