@@ -1,15 +1,24 @@
 import s from "./ContactList.module.css";
 import { useEffect, } from 'react'
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Loader from "react-loader-spinner";
 import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
-import { filter } from "../redux/Contacts/actions";
+
 
 function ContactList({ contacts, deleteContact, fetchContacts, isLoading }) {
+  // const dispatch = useDispatch()
+
+
   useEffect(() => {
     fetchContacts()
-  }, []);
-  console.log(isLoading);
+    // dispatch(fetchContacts())
+  }, [fetchContacts]);
+
+
+
+
+
+
   return (
     <>
       {isLoading && <Loader type="Bars" color="#00008B" height={120} width={120} />}
