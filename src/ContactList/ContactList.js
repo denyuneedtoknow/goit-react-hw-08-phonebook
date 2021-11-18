@@ -1,10 +1,14 @@
 import s from "./ContactList.module.css";
+import { useEffect, } from 'react'
 import { connect } from "react-redux";
-import * as actions from "../redux/Contacts/actions";
-import { addContact, deleteContact } from '../redux/Contacts/operations'
 
-function ContactList({ contacts, deleteContact }) {
+import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
+import { filter } from "../redux/Contacts/actions";
 
+function ContactList({ contacts, deleteContact, fetchContacts }) {
+  useEffect(() => {
+    fetchContacts()
+  }, []);
 
   return (
     <>
@@ -17,27 +21,28 @@ function ContactList({ contacts, deleteContact }) {
           <button className={s.addBtn} id={contact.id} onClick={deleteContact}>
             Delete
           </button>
+
         </div>
       ))}
     </>
   );
 }
 
-
-
-
-const mapStateToProps = (state) => {
-  const filter = state.filter
+const normalizedFilter = (filter, contacts) => {
   const loweredFilter = filter.toLowerCase()
-  return {
-    contacts: state.contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(loweredFilter)),
-  }
-};
+  return contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(loweredFilter))
+}
+
+
+const mapStateToProps = (state) => ({
+  contacts: normalizedFilter(state.filter, state.contacts),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   addContact: () => dispatch(addContact()),
   deleteContact: (id) => dispatch(deleteContact(id)),
+  fetchContacts: () => dispatch(fetchContacts())
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

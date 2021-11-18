@@ -10,6 +10,7 @@ const initState = [];
 
 
 const contactList = createReducer(initState, {
+  [fetchContactsSuccess]: (state, action) => action.payload,
   [addContactSuccess]: (state, action) => {
     if (
       state.find((contact) => {
@@ -22,7 +23,11 @@ const contactList = createReducer(initState, {
 
       return [...state, action.payload];
     }
+
   },
+
+
+
   [deleteContactSuccess]: (state, action) => {
     // console.log(action);
     const newState = state.filter(
