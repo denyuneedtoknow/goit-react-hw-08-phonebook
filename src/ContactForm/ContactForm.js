@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css";
 import { connect } from "react-redux";
 import { addContact, deleteContact } from '../redux/Contacts/operations'
+import { getContacts } from '../redux/Contacts/selectors'
 
-function ContactForm({ onSubmit }) {
+function ContactForm({ onSubmit, contacts }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +31,20 @@ function ContactForm({ onSubmit }) {
 
   const submit = (e) => {
     e.preventDefault();
+
+    if (
+      contacts.find((contact) => {
+
+        return contact.name === name;
+      })
+    ) {
+      alert(`Sorry, contact ${name} already existing`);
+      resetForm();
+      return
+    };
     onSubmit({ name, number });
     resetForm();
-  };
+  }
 
   const nameId = uuidv4();
   const numberId = uuidv4();
@@ -72,10 +85,13 @@ function ContactForm({ onSubmit }) {
     </form>
   );
 }
+const mapStateToProps = (state) => ({
+  contacts: getContacts(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ name, number }) =>
     dispatch(addContact({ name, number })),
   deleteContact: (id) => dispatch(deleteContact(id))
 });
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

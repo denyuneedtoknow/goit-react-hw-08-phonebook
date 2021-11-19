@@ -2,6 +2,7 @@ import s from "./ContactList.module.css";
 import { useEffect, } from 'react'
 import { connect, } from "react-redux";
 import Loader from "react-loader-spinner";
+import { normalizedContact, getLoading } from '../redux/Contacts/selectors'
 import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
 
 
@@ -32,16 +33,11 @@ function ContactList({ contacts, deleteContact, fetchContacts, isLoading }) {
   );
 }
 
-const normalizedFilter = (filter, contacts) => {
-  const loweredFilter = filter.toLowerCase()
-  return contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(loweredFilter))
-}
 
 
 const mapStateToProps = (state) => ({
-  contacts: normalizedFilter(state.filter, state.contacts),
-  isLoading: state.loading
+  contacts: normalizedContact(state),
+  isLoading: getLoading(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

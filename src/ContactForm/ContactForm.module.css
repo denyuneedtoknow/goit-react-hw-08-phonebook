@@ -9,19 +9,26 @@
   display: flex;
   align-items: center;
   margin-right: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .input {
   margin: 5px;
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 .addBtn {
   padding: 2px;
   background-color: darkblue;
   border: 1px solid black;
   border-radius: 4px;
-  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
   color: aliceblue;
   margin-left: auto;
 }
+.addBtn:hover,
+.addBtn:focus {
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
 .inputTitle {
   color: blue;
 }

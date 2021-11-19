@@ -9,10 +9,12 @@ h1 {
   display: flex;
   justify-content: center;
   color: darkblue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 h2 {
   display: flex;
   justify-content: center;
   color: darkblue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
