@@ -2,8 +2,8 @@ import s from "./ContactList.module.css";
 import { useEffect, } from 'react'
 import { connect, } from "react-redux";
 import Loader from "react-loader-spinner";
-import { normalizedContact, getLoading } from '../redux/Contacts/selectors'
-import { addContact, deleteContact, fetchContacts } from '../redux/Contacts/operations'
+import { normalizedContact, getLoading } from '../../redux/Contacts/selectors'
+import { addContact, deleteContact, fetchContacts } from '../../redux/Contacts/operations'
 
 
 function ContactList({ contacts, deleteContact, fetchContacts, isLoading }) {

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "./ContactForm.module.css";
 import { connect } from "react-redux";
-import { addContact, deleteContact } from '../redux/Contacts/operations'
-import { getContacts } from '../redux/Contacts/selectors'
+import { addContact, deleteContact } from '../../redux/Contacts/operations'
+import { getContacts } from '../../redux/Contacts/selectors'
 
 function ContactForm({ onSubmit, contacts }) {
   const [name, setName] = useState("");

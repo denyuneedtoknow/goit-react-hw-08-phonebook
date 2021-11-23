@@ -1,26 +1,31 @@
 import React from "react";
+import { Route, Routes, } from "react-router-dom";
 
 import "./App.css";
-import ContactList from "./ContactList/ContactList";
-import Filter from "./Filter/Filter";
-import ContactForm from "./ContactForm/ContactForm";
+
+import Navigation from "./Components/Navigation/Navigation";
+import PhonebookView from "./Views/PhonebookView";
+import HomeView from './Views/HomeView'
+import LoginView from './Views/LoginView'
+import RegistrationView from './Views/RegistrationView'
 
 
 function App() {
 
+  return (<div className="App">
+    <Navigation />
 
+    <Routes>
+      <Route path="/" element={<HomeView />} />
 
+      <Route path="/login" element={<LoginView />} />
 
-  return (
-    <div className="App">
-      <h1>Phonebook</h1>
-      <ContactForm />
+      <Route path="/register" element={<RegistrationView />} />
 
-      <Filter />
-      <h2>Contacts</h2>
-      <ContactList />
+      <Route path="/contacts" element={<PhonebookView />} />
 
-    </div>
+    </Routes>
+  </div>
   );
 }
 
