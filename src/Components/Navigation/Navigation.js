@@ -5,7 +5,7 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
     return (
         <div className={s.navigation}>
-            <NavLink exact to="/" className={s.link} activeclassname={s.activeLink}>
+            <NavLink to="/" className={s.link} activeclassname={s.activeLink}>
                 Home
             </NavLink>
             <NavLink to="/login" className={s.link} activeclassname={s.activeLink}>

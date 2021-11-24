@@ -1,26 +1,19 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
 import * as actions from "./actions";
-import { fetchContacts, addContact, deleteContact } from "./operations"
+import { fetchContacts, addContact, deleteContact, } from "./operations"
+import { addUser } from '../Users/operations'
 
 
 const initState = [];
 
 
-
 const contactList = createReducer(initState, {
+
   [fetchContacts.fulfilled]: (state, action) => {
     return action.payload
   },
   [addContact.fulfilled]: (state, action) => {
-    // if (
-    //   state.find((contact) => {
-    //     return contact.name === action.payload.name;
-    //   })
-    // ) {
-    //   alert(`Sorry, contact ${action.payload.name} already existing`);
-    //   return state;
-    // } else {
 
     return [...state, action.payload.data];
 
@@ -36,13 +29,15 @@ const contactList = createReducer(initState, {
 });
 
 
+
 const filter = createReducer("", {
   [actions.filter]: (_, action) => action.payload,
 });
 
-const loading = createReducer(false, { [addContact.fulfilled]: () => false, [addContact.rejected]: () => false, [addContact.pending]: () => true, [deleteContact.fulfilled]: () => false, [deleteContact.rejected]: () => false, [deleteContact.pending]: () => true, [fetchContacts.fulfilled]: () => false, [fetchContacts.rejected]: () => false, [fetchContacts.pending]: () => true, })
+const loading = createReducer(false, { [addContact.fulfilled]: () => false, [addContact.rejected]: () => false, [addContact.pending]: () => true, [deleteContact.fulfilled]: () => false, [deleteContact.rejected]: () => false, [deleteContact.pending]: () => true, [fetchContacts.fulfilled]: () => false, [fetchContacts.rejected]: () => false, [fetchContacts.pending]: () => true, [addUser.fulfilled]: () => false, [addUser.rejected]: () => false, [addUser.pending]: () => true, })
 export default combineReducers({
   contacts: contactList,
   filter: filter,
   loading: loading,
+
 });

@@ -8,7 +8,7 @@ import { getContacts } from '../../redux/Contacts/selectors'
 function LoginForm({ onSubmit, contacts }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+
 
 
   const handleChange = (e) => {
@@ -17,11 +17,9 @@ function LoginForm({ onSubmit, contacts }) {
       case "name":
         setName(value);
         break;
-      case "number":
-        setNumber(value);
-        break;
       case "email":
         setEmail(value);
+        console.log(email);
         break;
       default:
         return;
@@ -30,23 +28,12 @@ function LoginForm({ onSubmit, contacts }) {
 
   const resetForm = () => {
     setName("");
-    setNumber("");
+    setEmail("");
   };
 
   const submit = (e) => {
     e.preventDefault();
-
-    if (
-      contacts.find((contact) => {
-
-        return contact.name === name;
-      })
-    ) {
-      alert(`Sorry, contact ${name} already existing`);
-      resetForm();
-      return
-    };
-    onSubmit({ name, number });
+    onSubmit({ name, email });
     resetForm();
   }
 
@@ -61,7 +48,7 @@ function LoginForm({ onSubmit, contacts }) {
           className={s.input}
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
           value={name}
@@ -73,9 +60,9 @@ function LoginForm({ onSubmit, contacts }) {
         <p className={s.inputTitle}>E-mail</p>
         <input
           className={s.input}
-          type="tel"
-          name="number"
-          pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+          type="text"
+          name="email"
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="e-mail"
           required
           value={email}

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "./RegistrationForm.module.css";
+import { connect } from "react-redux";
+import { addUser, } from '../../redux/Users/operations'
+
 
 const RegistrationForm = ({ onSubmit, contacts }) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [number, setNumber] = useState("");
+    const [password, setPassword] = useState("");
 
 
     const handleChange = (e) => {
@@ -15,8 +18,8 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
             case "name":
                 setName(value);
                 break;
-            case "number":
-                setNumber(value);
+            case "password":
+                setPassword(value);
                 break;
             case "email":
                 setEmail(value);
@@ -28,33 +31,19 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
 
     const resetForm = () => {
         setName("");
-        setNumber("");
+        setPassword("");
+        setEmail("");
     };
 
     const submit = (e) => {
         e.preventDefault();
-
-        if (
-            contacts.find((contact) => {
-
-                return contact.name === name;
-            })
-        ) {
-            alert(`Sorry, contact ${name} already existing`);
-            resetForm();
-            return
-        };
-        onSubmit({ name, number });
+        onSubmit({ name, email, password });
         resetForm();
     }
 
     const nameId = uuidv4();
-    const numberId = uuidv4();
+    const passwordId = uuidv4();
     const emailId = uuidv4();
-
-
-
-
 
 
     return (
@@ -66,8 +55,8 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
                         className={s.input}
                         type="text"
                         name="name"
-                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+                        // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                         required
                         value={name}
                         id={nameId}
@@ -78,9 +67,9 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
                     <p className={s.inputTitle}>E-mail</p>
                     <input
                         className={s.input}
-                        type="tel"
-                        name="number"
-                        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                        type="text"
+                        name="email"
+                        // pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
                         title="e-mail"
                         required
                         value={email}
@@ -88,22 +77,22 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
                         onChange={handleChange}
                     ></input>
                 </label>
-                <label className={s.label} htmlFor={numberId}>
-                    <p className={s.inputTitle}>Phone</p>
+                <label className={s.label} htmlFor={passwordId}>
+                    <p className={s.inputTitle}>Password</p>
                     <input
                         className={s.input}
-                        type="tel"
-                        name="number"
-                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                        title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                        type="text"
+                        name="password"
+                        // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        // title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                         required
-                        value={number}
-                        id={numberId}
+                        value={password}
+                        id={passwordId}
                         onChange={handleChange}
                     ></input>
                 </label>
                 <button className={s.addBtn} type="submit">
-                    Add contact
+                    Register
                 </button>
             </form></>
     )
@@ -113,7 +102,17 @@ const RegistrationForm = ({ onSubmit, contacts }) => {
 
 
 
+// const mapStateToProps = (state) => ({
+//     contacts: getContacts(state)
+// });
+
+const mapDispatchToProps = (dispatch) => ({
+    onSubmit: ({ name, email, password }) =>
+        dispatch(addUser({ name, email, password })),
+    // deleteContact: (id) => dispatch(deleteContact(id))
+});
+export default connect(null, mapDispatchToProps)(RegistrationForm);
 
 
 
-export default RegistrationForm
+// export default RegistrationForm
