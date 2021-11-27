@@ -6,7 +6,7 @@ import { addUser } from "../Users/operations"
 const initState = [];
 
 const users = createReducer(initState, {
-    'user/registration/fulfilled': (state, action) => {
+    [addUser.fulfilled]: (state, action) => {
         console.log(state);
         console.log(action);
         return [state]
