@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-import * as actions from "./actions";
-import { fetchContacts, addContact, deleteContact, } from "./operations"
-import { addUser } from '../Users/operations'
+import * as actions from "./contacts-actions";
+import { fetchContacts, addContact, deleteContact, } from "./contacts-operations"
+import { addUser } from '../Users/users-operations'
 
 
 const initState = [];

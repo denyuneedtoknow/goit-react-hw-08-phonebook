@@ -8,6 +8,11 @@ import PhonebookView from "./Views/PhonebookView";
 import HomeView from './Views/HomeView'
 import LoginView from './Views/LoginView'
 import RegistrationView from './Views/RegistrationView'
+import { PublicRoute } from './Routes/PublicRoute'
+import { PrivateRoute } from './Routes/PrivateRoute'
+
+
+const isAuth = false
 
 
 function App() {
@@ -16,13 +21,13 @@ function App() {
     <Navigation />
 
     <Routes>
-      <Route path="/" element={<HomeView />} />
+      <Route path="/" element={<PrivateRoute isAuth={isAuth} component={HomeView} />} />
 
-      <Route path="/login" element={<LoginView />} />
+      <Route path="/login" element={<PublicRoute isAuth={isAuth} component={LoginView} />} />
 
-      <Route path="/register" element={<RegistrationView />} />
+      <Route path="/register" element={<PublicRoute isAuth={isAuth} component={RegistrationView} />} />
 
-      <Route path="/contacts" element={<PhonebookView />} />
+      <Route path="/contacts" element={<PrivateRoute isAuth={isAuth} component={PhonebookView} />} />
 
     </Routes>
   </div>

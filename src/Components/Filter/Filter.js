@@ -1,5 +1,5 @@
 import { connect, } from "react-redux";
-import * as actions from "../../redux/Contacts/actions";
+import * as actions from "../../redux/Contacts/contacts-actions";
 import s from "./Filter.module.css";
 
 function Filter({ data, handler }) {

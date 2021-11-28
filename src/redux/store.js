@@ -1,5 +1,5 @@
 
-import contactReducer from "../redux/Contacts/reducers";
+import contactReducer from "../redux/Contacts/contacts-reducers";
 import {
   configureStore,
   // combineReducers,

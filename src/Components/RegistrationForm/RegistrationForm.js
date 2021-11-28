@@ -2,10 +2,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "./RegistrationForm.module.css";
 import { connect } from "react-redux";
-import { addUser, } from '../../redux/Users/operations'
+import { addUser, } from '../../redux/Users/users-operations'
 
 
-const RegistrationForm = ({ onSubmit, contacts }) => {
+const RegistrationForm = ({ onSubmit, }) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
