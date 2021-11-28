@@ -1,7 +1,9 @@
 
 import contactReducer from "../redux/Contacts/contacts-reducers";
+import auth from "./Users/users-slice"
 import {
   configureStore,
+  combineReducers,
   // combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
@@ -14,6 +16,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+
 } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 
@@ -25,6 +28,8 @@ const middleware = [
   }),
 ];
 
+// const grandReducer = combineReducers({ contacts: contactReducer, auth, },)
+
 // const persistConfig = {
 //   key: "root",
 //   storage,
@@ -33,7 +38,7 @@ const middleware = [
 // const persistedReducer = persistReducer(persistConfig, contactReducer);
 
 export const store = configureStore({
-  reducer: contactReducer,
+  reducer: { contacts: contactReducer, auth: auth, },
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });

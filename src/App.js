@@ -12,7 +12,7 @@ import { PublicRoute } from './Routes/PublicRoute'
 import { PrivateRoute } from './Routes/PrivateRoute'
 
 
-const isAuth = false
+const isAuth = true
 
 
 function App() {

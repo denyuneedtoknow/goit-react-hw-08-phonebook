@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// axios.defaults.baseURL = 'https://6193c189d3ae6d0017da8819.mockapi.io'
+axios.defaults.baseURL = 'https://6193c189d3ae6d0017da8819.mockapi.io'
 
 
 
