@@ -23,9 +23,9 @@ function App() {
     <Routes>
       <Route path="/" element={<PrivateRoute isAuth={isAuth} component={HomeView} />} />
 
-      <Route path="/login" element={<PublicRoute isAuth={isAuth} component={LoginView} />} />
+      <Route path="/login" element={<PrivateRoute isAuth={isAuth} component={LoginView} />} />
 
-      <Route path="/register" element={<PublicRoute isAuth={isAuth} component={RegistrationView} />} />
+      <Route path="/register" element={<PrivateRoute isAuth={isAuth} component={RegistrationView} />} />
 
       <Route path="/contacts" element={<PrivateRoute isAuth={isAuth} component={PhonebookView} />} />
 

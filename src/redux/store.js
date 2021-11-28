@@ -8,8 +8,8 @@ import {
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
 import {
-  // persistStore,
-  // persistReducer,
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -18,7 +18,7 @@ import {
   REGISTER,
 
 } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -28,19 +28,21 @@ const middleware = [
   }),
 ];
 
-// const grandReducer = combineReducers({ contacts: contactReducer, auth, },)
+const grandReducer = combineReducers({ contacts: contactReducer, auth, },)
 
-// const persistConfig = {
-//   key: "root",
-//   storage,
-// };
 
-// const persistedReducer = persistReducer(persistConfig, contactReducer);
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["token"]
+};
+
+const persistedReducer = persistReducer(persistConfig, grandReducer);
 
 export const store = configureStore({
-  reducer: { contacts: contactReducer, auth: auth, },
+  reducer: persistedReducer,
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);

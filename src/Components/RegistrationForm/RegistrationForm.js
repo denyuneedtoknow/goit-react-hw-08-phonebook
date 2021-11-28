@@ -67,7 +67,7 @@ const RegistrationForm = ({ onSubmit, }) => {
                     <p className={s.inputTitle}>E-mail</p>
                     <input
                         className={s.input}
-                        type="text"
+                        type="mail"
                         name="email"
                         // pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
                         title="e-mail"
@@ -81,7 +81,7 @@ const RegistrationForm = ({ onSubmit, }) => {
                     <p className={s.inputTitle}>Password</p>
                     <input
                         className={s.input}
-                        type="text"
+                        type="password"
                         name="password"
                         // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                         // title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
