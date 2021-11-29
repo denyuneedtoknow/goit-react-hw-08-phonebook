@@ -10,37 +10,35 @@ import {
 import {
   persistStore,
   persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
+  // FLUSH,
+  // REHYDRATE,
+  // PAUSE,
+  // PERSIST,
+  // PURGE,
+  // REGISTER,
 
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const middleware = [
   ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
+    serializableCheck: false
   }),
 ];
 
-const grandReducer = combineReducers({ contacts: contactReducer, auth, },)
+
 
 
 const persistConfig = {
-  key: "root",
+  key: "auth",
   storage,
   whitelist: ["token"]
 };
 
-const persistedReducer = persistReducer(persistConfig, grandReducer);
+const persistedReducer = persistReducer(persistConfig, auth);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: { auth: persistedReducer, contacts: contactReducer },
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });

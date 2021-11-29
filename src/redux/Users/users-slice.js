@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addUser } from "./users-operations"
+import { addUser, loginUser, currentUser } from "./users-operations"
 
 
 const authSlice = createSlice({
@@ -14,17 +14,49 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: {
         [addUser.pending](state, action) {
-            return { ...state, isLoading: true }
+            state.isLoading = true
         },
         [addUser.fulfilled](state, action) {
-            return { ...state, isLoading: false, isAuth: true, user: action.payload.user, token: action.payload.token }
+            state.isLoading = false
+            state.isAuth = true
+            state.user = action.payload.data.user
+            state.token = action.payload.data.token
         },
         [addUser.rejected](state, action) {
-            return {
-                isLoading: false,
-                error: action.payload,
-            }
-        }
+            state.isLoading = false
+            state.error = action.payload
+        },
+        [loginUser.fulfilled](state, action) {
+            state.isLoading = false
+            state.isAuth = true
+            state.user = action.payload.data.user
+            state.token = action.payload.data.token
+        },
+        [loginUser.pending](state, action) {
+            state.isLoading = true
+        },
+        [loginUser.rejected](state, action) {
+            state.isLoading = false
+            state.error = action.payload
+            state.user = ''
+            state.token = ''
+        },
+        [currentUser.pending](state, action) {
+            state.isLoading = true
+
+        },
+        [currentUser.fulfilled](state, action) {
+            state.isLoading = false
+            state.user = action.payload.data
+            state.isAuth = true
+        },
+        [currentUser.rejected](state, action) {
+            state.isLoading = false
+            state.user = ''
+            state.token = ''
+            state.isAuth = false
+            state.error = action.payload
+        },
     }
 })
 

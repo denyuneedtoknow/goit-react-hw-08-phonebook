@@ -10,12 +10,19 @@ import LoginView from './Views/LoginView'
 import RegistrationView from './Views/RegistrationView'
 import { PublicRoute } from './Routes/PublicRoute'
 import { PrivateRoute } from './Routes/PrivateRoute'
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { currentUser } from './redux/Users/users-operations'
 
 
 const isAuth = true
 
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(currentUser())
+  })
 
   return (<div className="App">
     <Navigation />
