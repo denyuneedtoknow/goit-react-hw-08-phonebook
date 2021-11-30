@@ -13,34 +13,37 @@ import { PrivateRoute } from './Routes/PrivateRoute'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { currentUser } from './redux/Users/users-operations'
-
-
-
+import { useSelector } from "react-redux";
+import { isRefreshing } from './redux/Users/users-selectors'
 
 
 
 function App() {
   const dispatch = useDispatch()
+  // const isRefreshing = useSelector(isRefreshing)
   useEffect(() => {
     dispatch(currentUser())
   })
 
 
 
-  return (<div className="App">
-    <Navigation />
+  return (
+    // !isRefreshing &&
+    <div className="App">
+      <Navigation />
 
-    <Routes>
-      <Route path="/" element={<PrivateRoute component={HomeView} />} />
+      <Routes>
+        <Route path="/" element={<PrivateRoute component={HomeView} />} />
 
-      <Route path="/login" element={<PublicRoute component={LoginView} />} />
+        <Route path="/login" element={<PublicRoute component={LoginView} />} />
 
-      <Route path="/register" element={<PublicRoute component={RegistrationView} />} />
+        <Route path="/register" element={<PublicRoute component={RegistrationView} />} />
 
-      <Route path="/contacts" element={<PrivateRoute component={PhonebookView} />} />
+        <Route path="/contacts" element={<PrivateRoute component={PhonebookView} />} />
 
-    </Routes>
-  </div>
+      </Routes>
+    </div>
+
   );
 }
 

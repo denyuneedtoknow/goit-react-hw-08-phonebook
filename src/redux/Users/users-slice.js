@@ -9,7 +9,8 @@ const authSlice = createSlice({
         token: "",
         error: null,
         isLoading: false,
-        isAuth: false
+        isAuth: false,
+        isRefreshing: false
     },
     reducers: {},
     extraReducers: {
@@ -44,12 +45,14 @@ const authSlice = createSlice({
         },
         [currentUser.pending](state, action) {
             state.isLoading = true
+            state.isRefreshing = true
 
         },
         [currentUser.fulfilled](state, action) {
             state.isLoading = false
             state.user = action.payload.data
             state.isAuth = true
+            state.isRefreshing = false
         },
         [currentUser.rejected](state, action) {
             state.isLoading = false
@@ -57,6 +60,7 @@ const authSlice = createSlice({
             state.token = ''
             state.isAuth = false
             state.error = action.payload
+            state.isRefreshing = false
         },
         [logoutUser.pending](state, action) {
             state.isLoading = true
