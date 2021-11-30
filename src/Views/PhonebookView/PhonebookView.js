@@ -12,7 +12,7 @@ const PhonebookView = () => {
             <ContactForm />
             <Filter />
             <h2>Contacts</h2>
-            {/* <ContactList /> */}
+            <ContactList />
         </div>
     </>)
 }

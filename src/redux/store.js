@@ -3,8 +3,6 @@ import contactReducer from "../redux/Contacts/contacts-reducers";
 import auth from "./Users/users-slice"
 import {
   configureStore,
-  combineReducers,
-  // combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
 import {
