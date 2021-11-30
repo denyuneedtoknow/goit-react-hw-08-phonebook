@@ -5,10 +5,10 @@ import { isAuthorized } from "../redux/Users/users-selectors"
 
 export function PublicRoute({ component: C, }) {
     const isAuth = useSelector(isAuthorized)
-    return ((<>
+    return <>
 
-        {isAuth ? <Navigate to="/" /> : <C />}
+        {isAuth ? <Navigate to="/contacts" /> : <C />}
 
         {/* <C /> */}
-    </>))
+    </>
 }

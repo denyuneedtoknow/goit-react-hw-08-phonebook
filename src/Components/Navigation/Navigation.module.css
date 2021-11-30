@@ -2,13 +2,13 @@
   margin-top: 50px;
 }
 .link {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: darkblue;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #00008b;
   padding-right: 10px;
 }
 .activeLink {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #ffffff;
 }
 .addBtn {
   padding: 2px;
@@ -25,8 +25,26 @@
   box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6);
 }
 
-.navMenu {
+.navMenuAuth {
   display: flex;
   align-items: center;
   list-style-type: none;
+  justify-content: space-around;
+  padding: 0;
+  width: 350px;
+}
+.navMenuUnAuth {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  width: 350px;
+}
+.navMenuThumb {
+  display: flex;
+  width: 200px;
+  align-items: flex-end;
+}
+.navMenuSentense {
+  margin-right: 6px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }

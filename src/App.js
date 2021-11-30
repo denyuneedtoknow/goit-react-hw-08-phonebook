@@ -13,14 +13,12 @@ import { PrivateRoute } from './Routes/PrivateRoute'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { currentUser } from './redux/Users/users-operations'
-import { useSelector } from "react-redux";
-import { isRefreshing } from './redux/Users/users-selectors'
+
 
 
 
 function App() {
   const dispatch = useDispatch()
-  // const isRefreshing = useSelector(isRefreshing)
   useEffect(() => {
     dispatch(currentUser())
   })
@@ -28,7 +26,7 @@ function App() {
 
 
   return (
-    // !isRefreshing &&
+
     <div className="App">
       <Navigation />
 

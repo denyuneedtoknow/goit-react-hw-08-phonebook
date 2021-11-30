@@ -1,8 +1,12 @@
 import LoginForm from '../../Components/LoginForm'
-import { getUserName, isAuthorized } from '../../redux/Users/users-selectors'
+import { useSelector } from "react-redux";
+import { getIsRefreshing } from '../../redux/Users/users-selectors'
 const LoginView = () => {
+    const isReloading = useSelector(getIsRefreshing)
+    console.log(isReloading);
     return (
-        <><h1>Please Log In</h1>
+        !isReloading &&
+        <>
             <LoginForm />
         </>
     )

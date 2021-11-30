@@ -14,9 +14,18 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
     const isAuth = useSelector(isAuthorized)
     const username = useSelector(getUserName)
-
+    const active = {
+        color: '#ffffff',
+        textDecoration: 'none',
+        fontWeight: 700,
+    }
+    const notActive = {
+        color: '#00008b',
+        textDecoration: 'none',
+        fontWeight: 700,
+    }
     const dispatch = useDispatch()
-
+    console.log(s);
     const handleLogOut = () => {
         dispatch(logoutUser())
     }
@@ -25,17 +34,27 @@ const Navigation = () => {
         <div className={s.navigation}>
             {isAuth ?
                 <>
-                    <ul className={s.navMenu}>
-                        <li className={s.navMenuItems}><NavLink to="/contacts" className={s.link} activeclassname={s.activeLink}>Contacts</NavLink></li>
-                        <li className={s.navMenuItems}><NavLink to="/" className={s.link} activeclassname={s.activeLink}>Home</NavLink></li>
-                        <li className={s.navMenuItems}><p className={s.link}>Welcome, {username}</p></li>
+                    <ul className={s.navMenuAuth}>
+                        <li className={s.navMenuItems}><NavLink to="/contacts" style={({ isActive }) => isActive ? active : notActive}>Contacts</NavLink></li>
+                        <li className={s.navMenuItems}><NavLink to="/" style={({ isActive }) => isActive ? active : notActive}>Home</NavLink></li>
+                        <li className={s.navMenuItems}><p className={s.navMenuSentense}>Welcome, {username}</p></li>
                         <li className={s.navMenuItems}><button type="button" className={s.addBtn} onClick={handleLogOut}>Log Out</button></li>
                     </ul>
                 </> :
                 <>
-                    <ul className={s.navMenu}>
-                        <li className={s.navMenuItems}><NavLink to="/login" className={s.link} activeclassname={s.activeLink}>Log In </NavLink></li>
-                        <li className={s.navMenuItems}><NavLink to="/register" className={s.link} activeclassname={s.activeLink}>Registration</NavLink></li>
+                    <ul className={s.navMenuUnAuth}>
+                        <li>
+                            <div className={s.navMenuThumb}>
+                                <p className={s.navMenuSentense}>Please</p>
+                                <NavLink to="/login" style={({ isActive }) => isActive ? active : notActive} >Log In </NavLink>
+                            </div >
+                        </li>
+                        <li>
+                            <div className={s.navMenuThumb}>
+                                <p className={s.navMenuSentense}>or</p>
+                                <NavLink to="/register" style={({ isActive }) => isActive ? active : notActive} >Register</NavLink>
+                            </div>
+                        </li>
                     </ul>
 
 
