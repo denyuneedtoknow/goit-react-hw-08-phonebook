@@ -13,13 +13,13 @@ const token = {
     },
 };
 
-
 export const addUser = createAsyncThunk(
     "user/registration",
     async ({ name, email, password }, { rejectWithValue }) => {
         try {
             const user = await userAPI.registerUser({ name, email, password })
-            // console.log(user);
+            token.set(user.data.token)
+
             return user;
         }
         catch (error) {
@@ -32,6 +32,9 @@ export const loginUser = createAsyncThunk(
     async ({ email, password }, { rejectWithValue }) => {
         try {
             const user = await userAPI.loginUser({ email, password },)
+
+            token.set(user.data.token)
+
             return user;
         }
         catch (error) {
@@ -40,13 +43,10 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-
-
 export const currentUser = createAsyncThunk(
     "user/current",
     async (_, { rejectWithValue, getState }) => {
         const state = getState()
-
         const persistedToken = state.auth.token;
         if (persistedToken === null) {
             return rejectWithValue()
@@ -62,3 +62,15 @@ export const currentUser = createAsyncThunk(
     }
 );
 
+export const logoutUser = createAsyncThunk(
+    'auth/logout',
+    async (_, { rejectWithValue },) => {
+
+        try {
+            await axios.post('/users/logout');
+            token.unset();
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    },
+)

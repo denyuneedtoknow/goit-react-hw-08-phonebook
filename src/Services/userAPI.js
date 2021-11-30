@@ -15,7 +15,7 @@ export async function loginUser({ email, password }) {
     return data
 }
 export async function currentUser() {
-    ;
+
     const data = axios.get('/users/current',)
     return data
 }

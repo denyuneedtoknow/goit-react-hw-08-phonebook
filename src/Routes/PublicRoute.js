@@ -1,6 +1,11 @@
 import { Navigate } from "react-router"
-export function PublicRoute({ component: C, isAuth }) {
-    return ((<><h1>Public</h1>
+import { useSelector } from "react-redux";
+import { isAuthorized } from "../redux/Users/users-selectors"
+
+
+export function PublicRoute({ component: C, }) {
+    const isAuth = useSelector(isAuthorized)
+    return ((<>
 
         {isAuth ? <Navigate to="/" /> : <C />}
 

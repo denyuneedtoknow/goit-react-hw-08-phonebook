@@ -15,7 +15,8 @@ import { useEffect } from "react";
 import { currentUser } from './redux/Users/users-operations'
 
 
-const isAuth = true
+
+
 
 
 function App() {
@@ -24,17 +25,19 @@ function App() {
     dispatch(currentUser())
   })
 
+
+
   return (<div className="App">
     <Navigation />
 
     <Routes>
-      <Route path="/" element={<PrivateRoute isAuth={isAuth} component={HomeView} />} />
+      <Route path="/" element={<PrivateRoute component={HomeView} />} />
 
-      <Route path="/login" element={<PrivateRoute isAuth={isAuth} component={LoginView} />} />
+      <Route path="/login" element={<PublicRoute component={LoginView} />} />
 
-      <Route path="/register" element={<PrivateRoute isAuth={isAuth} component={RegistrationView} />} />
+      <Route path="/register" element={<PublicRoute component={RegistrationView} />} />
 
-      <Route path="/contacts" element={<PrivateRoute isAuth={isAuth} component={PhonebookView} />} />
+      <Route path="/contacts" element={<PrivateRoute component={PhonebookView} />} />
 
     </Routes>
   </div>
