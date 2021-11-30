@@ -10,3 +10,17 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: white;
 }
+.addBtn {
+  padding: 2px;
+  height: 22px;
+  background-color: darkblue;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  color: aliceblue;
+  margin-left: auto;
+}
+.addBtn:hover,
+.addBtn:focus {
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6);
+}
