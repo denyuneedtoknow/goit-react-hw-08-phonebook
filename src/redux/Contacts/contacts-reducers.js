@@ -5,10 +5,16 @@ import { fetchContacts, addContact, deleteContact, } from "./contacts-operations
 import { addUser } from '../Users/users-operations'
 
 
-const initState = [];
+// const initState = [];
+
+const initState = {
+  contactsList: [],
+  filter: '',
+  isLoading: false,
+}
 
 
-const contactList = createReducer(initState, {
+const contactList = createReducer(initState.contactsList, {
 
   [fetchContacts.fulfilled]: (state, action) => {
     return action.payload
@@ -19,15 +25,15 @@ const contactList = createReducer(initState, {
 
   },
 
+
   [deleteContact.fulfilled]: (state, action) => {
+    console.log(action.payload);
     const newState = state.filter(
       (contact) => contact.id !== action.payload.id
     );
-
     return newState;
   },
 });
-
 
 
 const filter = createReducer("", {
@@ -42,5 +48,4 @@ export default combineReducers({
   contacts: contactList,
   filter: filter,
   loading: loading,
-
 });
