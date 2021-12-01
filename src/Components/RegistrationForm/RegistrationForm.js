@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import s from "./RegistrationForm.module.css";
 import { connect } from "react-redux";
 import { addUser, } from '../../redux/Users/users-operations'
+import s from "./RegistrationForm.module.css";
 
 
 const RegistrationForm = ({ onSubmit, }) => {
@@ -11,7 +11,7 @@ const RegistrationForm = ({ onSubmit, }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-
+    console.log(s.inputTitle);
     const handleChange = (e) => {
         const { name, value } = e.target;
         switch (name) {
@@ -55,8 +55,6 @@ const RegistrationForm = ({ onSubmit, }) => {
                         className={s.input}
                         type="text"
                         name="name"
-                        // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                        // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                         required
                         value={name}
                         id={nameId}
@@ -69,8 +67,6 @@ const RegistrationForm = ({ onSubmit, }) => {
                         className={s.input}
                         type="mail"
                         name="email"
-                        // pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-                        title="e-mail"
                         required
                         value={email}
                         id={emailId}
@@ -83,8 +79,6 @@ const RegistrationForm = ({ onSubmit, }) => {
                         className={s.input}
                         type="password"
                         name="password"
-                        // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                        // title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                         required
                         value={password}
                         id={passwordId}
