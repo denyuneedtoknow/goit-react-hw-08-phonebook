@@ -27,9 +27,9 @@ const contactList = createReducer(initState.contactsList, {
 
 
   [deleteContact.fulfilled]: (state, action) => {
-    console.log(action.payload);
+    console.log(action.payload.target.id);
     const newState = state.filter(
-      (contact) => contact.id !== action.payload.id
+      (contact) => contact.id !== action.payload.target.id
     );
     return newState;
   },
