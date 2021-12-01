@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getIsRefreshing } from '../../redux/Users/users-selectors'
 const LoginView = () => {
     const isReloading = useSelector(getIsRefreshing)
-    console.log(isReloading);
+    // console.log(isReloading);
     return (
         !isReloading &&
         <>

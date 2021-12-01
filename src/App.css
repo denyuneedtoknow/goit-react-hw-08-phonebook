@@ -4,6 +4,8 @@
   align-items: center;
   background-color: #a0bff9;
   padding-bottom: 30px;
+
+  height: 1200px;
 }
 h1 {
   display: flex;

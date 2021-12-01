@@ -10,14 +10,17 @@ import LoginView from './Views/LoginView'
 import RegistrationView from './Views/RegistrationView'
 import { PublicRoute } from './Routes/PublicRoute'
 import { PrivateRoute } from './Routes/PrivateRoute'
-import { useDispatch } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useEffect } from "react";
 import { currentUser } from './redux/Users/users-operations'
+import web from "./Images/web.jpg"
+
 
 
 
 
 function App() {
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(currentUser())
@@ -27,7 +30,11 @@ function App() {
 
   return (
 
-    <div className="App">
+
+    <div className="App" style={{
+      backgroundImage: `url(${web})`, backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    }}>
       <Navigation />
 
       <Routes>
@@ -40,6 +47,7 @@ function App() {
         <Route path="/contacts" element={<PrivateRoute component={PhonebookView} />} />
 
       </Routes>
+      {/* <img src={web} alt={'Web'}></img> */}
     </div>
 
   );

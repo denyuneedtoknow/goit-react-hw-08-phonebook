@@ -1,13 +1,17 @@
 .navigation {
   margin-top: 50px;
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .link {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: #00008b;
   padding-right: 10px;
 }
 .activeLink {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: #ffffff;
 }
 .addBtn {
@@ -31,13 +35,13 @@
   list-style-type: none;
   justify-content: space-around;
   padding: 0;
-  width: 350px;
+  width: 600px;
 }
 .navMenuUnAuth {
   display: flex;
   list-style-type: none;
   padding: 0;
-  width: 350px;
+  width: 600px;
 }
 .navMenuThumb {
   display: flex;
@@ -46,5 +50,16 @@
 }
 .navMenuSentense {
   margin-right: 6px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #00008b;
+  font-weight: 900;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #ffffff;
+}
+
+.navMenuSentenseUnAuth {
+  font-weight: 900;
+  color: #00008b;
+  margin-right: 6px;
 }
