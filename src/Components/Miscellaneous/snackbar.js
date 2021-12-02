@@ -4,12 +4,13 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SimpleSnackbar(opener) {
+export default function SimpleSnackbar({ handleEvent }) {
     const [open, setOpen] = React.useState(false);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         setOpen(true);
-        console.log(opener);
+
+        handleEvent(e)
     };
 
     const handleClose = (event, reason) => {
@@ -43,7 +44,7 @@ export default function SimpleSnackbar(opener) {
                 open={open}
                 autoHideDuration={6000}
                 onClose={handleClose}
-                message="Note archived"
+                message='text'
                 action={action}
             />
         </div>
