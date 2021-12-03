@@ -82,6 +82,7 @@ function ContactForm({ onSubmit, contacts }) {
       <button className={s.addBtn} type="submit">
         Add contact
       </button>
+
     </form>
   );
 }
