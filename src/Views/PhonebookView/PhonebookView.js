@@ -3,14 +3,14 @@ import Filter from "../../Components/Filter";
 import ContactForm from "../../Components/ContactForm";
 import { useSelector } from "react-redux";
 import { getIsRefreshing } from '../../redux/Users/users-selectors'
-import SimpleSnackbar from '../../Components/Miscellaneous/snackbar'
+// import SimpleSnackbar from '../../Components/Miscellaneous/snackbar'
 
 
 const PhonebookView = () => {
 
-    const handleEvent = (e) => {
-        console.log(e);
-    }
+    // const handleEvent = (e) => {
+    //     console.log(e);
+    // }
 
 
 
@@ -18,11 +18,11 @@ const PhonebookView = () => {
     return (
         !isReloading && <>
             <div className="PhonebookView">
-                <button type='button' onClick={handleEvent}>click</button>
+                {/* <button type='button' onClick={handleEvent}>click</button> */}
 
 
 
-                <SimpleSnackbar message={'some message'} onClick={handleEvent} />
+                {/* <SimpleSnackbar message={'some message'} onClick={handleEvent} /> */}
 
 
 
